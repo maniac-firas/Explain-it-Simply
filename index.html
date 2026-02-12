@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explain It Simply - Open Innovation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-inter transition-all duration-300" id="app-body">
+
+    <div id="connection-banner" class="fixed top-0 left-0 w-full bg-amber-100 text-amber-800 text-center py-3 font-medium shadow-md transform -translate-y-full transition-transform duration-300 z-50 border-b border-amber-200">
+        <i class="fas fa-wifi-slash mr-2"></i> No internet connection. We'll wait here until you're back.
+    </div>
+
+    <nav class="bg-white shadow-sm sticky top-0 z-40 print:hidden border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-sm">E</div>
+                <h1 class="text-xl font-bold text-gray-800 tracking-tight">Explain It Simply</h1>
+            </div>
+            
+            <div class="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
+                <span class="text-xs text-gray-500 uppercase font-semibold hidden sm:inline tracking-wide">Text Size</span>
+                <button onclick="adjustFontSize(-1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-green-50 text-gray-600 font-bold transition-colors border border-gray-200" aria-label="Decrease font size">A-</button>
+                <button onclick="adjustFontSize(1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-green-50 text-gray-800 font-bold text-lg transition-colors border border-gray-200" aria-label="Increase font size">A+</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        
+        <div class="text-center mb-10 print:hidden">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Understanding shouldn't be a privilege.</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Paste complex government forms, medical bills, or legal contracts below. We'll translate them into plain English.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-12 transition-shadow hover:shadow-2xl print:hidden ring-1 ring-black/5">
+            
+            <div class="flex flex-wrap gap-3 justify-between items-center bg-gray-50 p-3 border-b border-gray-100">
+                
+                <div class="flex items-center gap-3">
+                    <label class="text-sm font-bold text-gray-500 uppercase tracking-wide hidden sm:block ml-2">
+                        <i class="fas fa-sliders-h mr-1"></i> Mode:
+                    </label>
+                    <div class="relative">
+                        <select id="complexityLevel" class="appearance-none bg-white border border-gray-200 text-gray-700 py-2 pl-3 pr-8 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm cursor-pointer hover:border-green-300 transition-colors">
+                            <option value="standard">Standard Simplicity</option>
+                            <option value="child">Explain like I'm 10</option>
+                            <option value="professional">Professional Summary</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-2">
+                    <button onclick="fillExample()" class="text-xs bg-white border border-gray-200 hover:bg-green-50 text-green-700 px-3 py-2 rounded-lg font-semibold transition-colors shadow-sm flex items-center gap-2">
+                        <i class="fas fa-magic"></i> <span class="hidden sm:inline">Try Example</span>
+                    </button>
+
+                    <button onclick="pasteText()" class="text-xs bg-white border border-gray-200 hover:bg-blue-50 text-blue-600 px-3 py-2 rounded-lg font-semibold transition-colors shadow-sm flex items-center gap-2">
+                        <i class="fas fa-paste"></i> Paste
+                    </button>
+
+                    <button onclick="clearText()" class="text-xs bg-white border border-gray-200 hover:bg-red-50 text-red-600 px-3 py-2 rounded-lg font-semibold transition-colors shadow-sm flex items-center gap-2 group">
+                        <i class="fas fa-trash-alt group-hover:rotate-12 transition-transform"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <textarea id="inputText" 
+                    class="w-full h-48 p-4 bg-white rounded-xl border-2 border-gray-100 focus:border-green-500 focus:ring-4 focus:ring-green-50 transition-all outline-none resize-none text-lg text-gray-700 placeholder-gray-400 leading-relaxed"
+                    placeholder="Paste your confusing text here... (e.g., 'The policyholder's liability for out-of-pocket expenses shall be limited...')"
+                ></textarea>
+                <div class="flex justify-between items-center mt-2 px-1">
+                    <span id="charCount" class="text-xs text-gray-400 font-medium">0 / 3000 chars</span>
+                    <span id="inputError" class="text-sm text-red-600 font-bold hidden bg-red-50 px-3 py-1 rounded-full border border-red-100">
+                        <i class="fas fa-exclamation-circle mr-1"></i> Please paste some text first!
+                    </span>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-t border-gray-100">
+                <div class="text-xs text-gray-400 flex items-center gap-1 hidden sm:flex">
+                    <i class="fas fa-shield-alt text-green-600"></i> Private & Secure
+                </div>
+                <button id="simplifyBtn" onclick="handleSimplify()" disabled 
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg shadow-green-200 transition-all transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 ml-auto sm:ml-0">
+                    Simplify Text <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingSection" class="hidden text-center py-12 print:hidden">
+            <div class="relative w-16 h-16 mx-auto mb-6">
+                <div class="absolute top-0 left-0 w-full h-full border-4 border-green-100 rounded-full"></div>
+                <div class="absolute top-0 left-0 w-full h-full border-4 border-green-500 rounded-full border-t-transparent animate-spin"></div>
+            </div>
+            <h3 id="loaderText" class="text-xl font-bold text-gray-700 animate-pulse">Reading document...</h3>
+            <p class="text-gray-400 text-sm mt-2">We are analyzing the complex terms</p>
+        </div>
+
+        <div id="resultsSection" class="hidden animate-fade-in-up">
+            
+            <div class="flex justify-center mb-8 print:hidden">
+                <div class="bg-gray-100 p-1.5 rounded-xl inline-flex border border-gray-200 shadow-inner">
+                    <button onclick="toggleView('simplified')" id="btn-simple" class="px-6 py-2 rounded-lg text-sm font-bold bg-white text-green-700 shadow-sm transition-all border border-gray-100">Simplified</button>
+                    <button onclick="toggleView('original')" id="btn-original" class="px-6 py-2 rounded-lg text-sm font-bold text-gray-500 hover:text-gray-700 transition-all border border-transparent">Original</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                
+                <div class="md:col-span-2 w-full">
+                    <div class="bg-white rounded-2xl shadow-lg border border-green-100 overflow-hidden relative group ring-1 ring-black/5">
+                        
+                        <div class="bg-green-50 px-6 py-4 border-b border-green-100 flex justify-between items-center print:bg-white print:border-none">
+                            <h3 class="font-bold text-green-800 flex items-center gap-2 text-lg">
+                                <i class="fas fa-book-open"></i> <span id="resultTitle">Plain English Version</span>
+                            </h3>
+                            
+                            <div class="flex gap-2 print:hidden">
+                                <button onclick="window.print()" title="Print Result" class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-green-600 hover:bg-green-600 hover:text-white transition-all shadow-sm border border-green-100">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                                <button onclick="copyToClipboard()" title="Copy Text" class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-green-600 hover:bg-green-600 hover:text-white transition-all shadow-sm border border-green-100">
+                                    <i class="far fa-copy" id="copyIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-8">
+                            <div id="simplifiedContent" class="prose prose-lg text-gray-700 leading-loose max-w-none">
+                                </div>
+                            <div id="originalContent" class="hidden prose prose-lg text-gray-500 leading-loose italic bg-gray-50 p-6 rounded-xl border border-gray-200 max-w-none">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1 sticky top-24 print:hidden">
+                    <div class="bg-green-50 rounded-2xl shadow-lg overflow-hidden border border-green-200 ring-1 ring-green-900/5">
+                        <div class="bg-green-100/80 px-5 py-4 border-b border-green-200">
+                            <h3 class="font-bold text-green-900 flex items-center gap-2">
+                                <i class="fas fa-lightbulb text-amber-500"></i> Key Points
+                            </h3>
+                        </div>
+                        <div class="p-5">
+                            <ul id="summaryList" class="space-y-3 text-sm leading-relaxed">
+                                </ul>
+                        </div>
+                        <div class="px-5 py-3 bg-green-100/50 border-t border-green-200">
+                            <p class="text-xs text-green-700 text-center font-medium opacity-80">
+                                Always verify critical details.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-8 text-gray-400 text-sm print:hidden">
+        <p>Made for the <span class="font-semibold text-gray-500">Open Innovation Hackathon</span></p>
+    </footer>
+
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 translate-y-24 opacity-0 z-50 flex items-center gap-3 border border-slate-700">
+        <i class="fas fa-info-circle text-yellow-400"></i>
+        <span id="toastMsg" class="font-medium">Notification</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

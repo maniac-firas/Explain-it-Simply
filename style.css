@@ -1,0 +1,106 @@
+/* Custom Font */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 1. KEY POINT HIGHLIGHTER (AI Driven) */
+.highlight-important {
+    background-color: #fef08a; /* Yellow-200 */
+    color: #854d0e; /* Yellow-800 */
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+    border-bottom: 2px solid #eab308; /* Yellow-500 */
+    transition: all 0.2s;
+    cursor: help;
+}
+
+.highlight-important:hover {
+    background-color: #fde047; /* Brighter yellow */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 2. ANIMATIONS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* 3. SCROLLBARS (Modern Look) */
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+textarea::-webkit-scrollbar-track {
+    background: #f9fafb;
+    border-radius: 8px;
+}
+textarea::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 8px;
+    border: 2px solid #f9fafb;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+}
+
+/* 4. ACCESSIBILITY CLASSES */
+.text-large {
+    font-size: 1.25rem !important; /* Larger base size */
+}
+.text-large p, .text-large li, .text-large textarea {
+    line-height: 2 !important; /* Double spacing for readability */
+}
+
+/* 5. PRINT OPTIMIZATION (Hide Sidebar, Show Content) */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #resultsSection, #resultsSection * {
+        visibility: visible;
+    }
+    
+    /* Reset Position */
+    #resultsSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        display: block !important;
+    }
+    
+    /* Layout Overrides */
+    .md\:col-span-1 {
+        display: none !important; /* Hide Sidebar */
+    }
+    .md\:col-span-2 {
+        width: 100% !important; /* Full Width Content */
+        grid-column: span 3;
+    }
+    
+    /* Hide Buttons */
+    button {
+        display: none !important;
+    }
+
+    /* Print Colors */
+    .highlight-important {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        border: 1px solid #ccc;
+    }
+}
