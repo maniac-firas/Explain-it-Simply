@@ -22,12 +22,31 @@
                 <h1 class="text-xl font-bold text-gray-800 tracking-tight">Explain It Simply</h1>
             </div>
             
-            <div class="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
-                <span class="text-xs text-gray-500 uppercase font-semibold hidden sm:inline tracking-wide">Text Size</span>
-                <button onclick="adjustFontSize(-1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-green-50 text-gray-600 font-bold transition-colors border border-gray-200" aria-label="Decrease font size">A-</button>
-                <button onclick="adjustFontSize(1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-green-50 text-gray-800 font-bold text-lg transition-colors border border-gray-200" aria-label="Increase font size">A+</button>
-            </div>
-        </div>
+            <div class="flex items-center gap-3">
+
+    <div class="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
+        <span class="text-xs text-gray-500 uppercase font-semibold hidden sm:inline tracking-wide">Text Size</span>
+        <button onclick="adjustFontSize(-1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-green-50 text-gray-600 font-bold transition-colors border border-gray-200">A-</button>
+        <button onclick="adjustFontSize(1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-green-50 text-gray-800 font-bold text-lg transition-colors border border-gray-200">A+</button>
+    </div>
+
+    <!-- Dark Mode Toggle with Icons -->
+    <div class="flex items-center gap-2 ml-3">
+
+        <i class="fas fa-sun text-yellow-500" id="sunIcon"></i>
+
+        <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="darkToggle" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+            <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+        </label>
+
+        <i class="fas fa-moon text-gray-400 hidden" id="moonIcon"></i>
+
+    </div>
+
+</div>
+
     </nav>
 
     <main class="max-w-5xl mx-auto px-4 py-10">

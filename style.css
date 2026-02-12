@@ -104,3 +104,57 @@ textarea::-webkit-scrollbar-thumb:hover {
         border: 1px solid #ccc;
     }
 }
+/* DARK MODE */
+
+.dark-mode {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+/* White → Black */
+.dark-mode .bg-white {
+    background-color: #000 !important;
+}
+
+.dark-mode .text-gray-900,
+.dark-mode .text-gray-800,
+.dark-mode .text-gray-700,
+.dark-mode .text-gray-600,
+.dark-mode .text-gray-500 {
+    color: #ffffff !important;
+}
+
+/* Black → White */
+.dark-mode .bg-slate-50,
+.dark-mode .bg-gray-50,
+.dark-mode .bg-gray-100 {
+    background-color: #111 !important;
+}
+
+/* Green → Blue */
+.dark-mode .bg-green-50,
+.dark-mode .bg-green-100,
+.dark-mode .bg-green-600,
+.dark-mode .bg-green-700 {
+    background-color: #1d4ed8 !important; /* Blue */
+}
+
+.dark-mode .text-green-600,
+.dark-mode .text-green-700,
+.dark-mode .text-green-800,
+.dark-mode .text-green-900 {
+    color: #3b82f6 !important;
+}
+
+.dark-mode .border-green-100,
+.dark-mode .border-green-200 {
+    border-color: #3b82f6 !important;
+}
+
+/* Buttons */
+.dark-mode button {
+    transition: all 0.3s ease;
+}
+#sunIcon, #moonIcon {
+    transition: all 0.3s ease;
+}

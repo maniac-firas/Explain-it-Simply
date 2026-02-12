@@ -279,3 +279,23 @@ function mockAPICall(text, complexity) {
         }, 2000); // 2 second delay to simulate AI thinking
     });
 }
+const darkToggle = document.getElementById("darkToggle");
+const body = document.getElementById("app-body");
+
+const sunIcon = document.getElementById("sunIcon");
+const moonIcon = document.getElementById("moonIcon");
+
+darkToggle.addEventListener("change", () => {
+
+    body.classList.toggle("dark-mode");
+
+    if (darkToggle.checked) {
+        sunIcon.classList.add("hidden");
+        moonIcon.classList.remove("hidden");
+    } else {
+        sunIcon.classList.remove("hidden");
+        moonIcon.classList.add("hidden");
+    }
+
+});
+
